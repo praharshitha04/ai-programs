@@ -1,1 +1,111 @@
+def left_side(s):
 
+
+    n1 = s[0][0]
+    m1 = s[0][1]
+    bl = s[0][2]
+    n2 = s[1][0]
+    m2 = s[1][1]
+    br = s[1][2]
+
+
+    if n1>=2:
+        if [[n1 - 2, m1, 0], [n2 + 2, m2, 1]] not in close:
+          open.append([[n1 - 2, m1, 0], [n2 + 2, m2, 1]])
+          close.append([[n1 - 2, m1, 0], [n2 + 2, m2, 1]])
+
+    if m1>=2:
+        if [[n1, m1 - 2, 0], [n2, m2 + 2, 1]] not in close:
+          open.append([[n1, m1 - 2, 0], [n2, m2 + 2, 1]])
+          close.append([[n1, m1 - 2, 0], [n2, m2 + 2, 1]])
+
+    if n1>=1:
+        if [[n1 - 1, m1, 0], [n2 + 1, m2, 1]] not in close:
+          open.append([[n1 - 1, m1, 0], [n2 + 1, m2, 1]])
+          close.append([[n1 - 1, m1, 0], [n2 + 1, m2, 1]])
+
+    if m1>=1:
+        if [[n1, m1 - 1, 0], [n2, m2 + 1, 1]] not in close:
+          open.append([[n1, m1 - 1, 0], [n2, m2 + 1, 1]])
+          close.append([[n1, m1 - 1, 0], [n2, m2 + 1, 1]])
+
+    if n1>=1 and m1>=1:
+        if [[n1 - 1, m1 - 1, 0], [n2 + 1, m2 + 1, 1]] not in close:
+          open.append([[n1 - 1, m1 - 1, 0], [n2 + 1, m2 + 1, 1]])
+          close.append([[n1 - 1, m1 - 1, 0], [n2 + 1, m2 + 1, 1]])
+
+
+
+
+def right_side(s):
+
+    n1 = s[0][0]
+    m1 = s[0][1]
+    bl = s[0][2]
+    n2 = s[1][0]
+    m2 = s[1][1]
+    br = s[1][2]
+
+
+    if n2>=2:
+        if [[n1 + 2, m1, 1], [n2 - 2, m2, 0]] not in close:
+          open.append([[n1 + 2, m1, 1], [n2 - 2, m2, 0]])
+          close.append([[n1 + 2, m1, 1], [n2 - 2, m2, 0]])
+
+    if m2>=2:
+        if [[n1, m1 + 2, 1], [n2, m2 - 2, 0]] not in close:
+          open.append([[n1, m1 + 2, 1], [n2, m2 - 2, 0]])
+          close.append([[n1, m1 + 2, 1], [n2, m2 - 2, 0]])
+
+    if n2>=1:
+        if [[n1 + 1, m1, 1], [n2 - 1, m2, 0]] not in close:
+          open.append([[n1 + 1, m1, 1], [n2 - 1, m2, 0]])
+          close.append([[n1 + 1, m1, 1], [n2 - 1, m2, 0]])
+
+    if m2>=1:
+        if [[n1, m1 + 1, 1], [n2, m2 - 1, 0]] not in close:
+          open.append([[n1, m1 + 1, 1], [n2, m2 - 1, 0]])
+          close.append([[n1, m1 + 1, 1], [n2, m2 - 1, 0]])
+
+    if n2>=1 and m2>=1:
+        if [[n1 + 1, m1 + 1, 1], [n2 - 1, m2 - 1, 0]] not in close:
+          open.append([[n1 + 1, m1 + 1, 1], [n2 - 1, m2 - 1, 0]])
+          close.append([[n1 + 1, m1 + 1, 1], [n2 - 1, m2 - 1, 0]])
+
+def bfs():
+    s=open.pop()
+
+    n1 = s[0][0]
+    m1 = s[0][1]
+    bl = s[0][2]
+    n2 = s[1][0]
+    m2 = s[1][1]
+    br = s[1][2]
+
+    path.append(s)
+
+    if n2==n and m2==m:
+      print("Moved all the missionaries and cannibals to other side")
+      return path
+
+    close.append(s)
+
+    if bl==1:
+      left_side(s)
+    if br==1:
+      right_side(s)
+
+    bfs()
+
+    return path
+
+
+
+
+n=int(input("enter no.of missionaries:"))
+m=int(input("enter no.of cannibals:"))
+l=[[n,m,1],[0,0,0]]
+open=[[[n,m,1],[0,0,0]]]
+close=[]
+path=[]
+bfs()
