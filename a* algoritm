@@ -1,0 +1,45 @@
+a=[[0,140,118,75,0,0,0,0],[140,0,0,0,80,99,0,0],[118,0,0,0,0,0,0,0],[75,0,0,0,0,0,0,0],[0,80,0,0,0,0,97,0],[0,99,0,0,0,0,0,211],[0,0,0,0,97,0,0,101],[0,0,0,0,0,211,101,0]]
+a
+
+inst=int(input("enter intial state"))
+
+h=list(map(int,input("enter hueristic value").split(' ')))
+
+def Astar(j,k):
+    q=0
+    m=100000
+    if(j not in v):
+            v.append(j)
+            if(h[j]==0):
+                v.append(k)
+                return v
+            for i in range(len(a)):
+                if(a[j][i]!=0):
+                    if(i in v):
+                        continue
+                    if(h[i]==0):
+                        v.append(i)
+                        m=a[j][i]
+                        k=k+m
+                        v.append(k)
+                        return v
+                    if(h[i]+a[j][i]<m):
+                        m=h[i]+a[j][i]
+                        q=i
+            k=k+a[j][q]
+            return(Astar(q,k))
+
+
+v=[]
+Astar(inst,k)
+
+
+a=10
+def fi():
+    global a
+    print(a)
+    #global a
+    a=a+10
+fi()
+print(a)
+
