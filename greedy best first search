@@ -1,0 +1,52 @@
+def second(x):
+
+    return x[1]
+
+
+def best_first(graph,node,goal):
+
+    visited=[]
+
+    queue=[]
+
+    visited.append((node,h[node]))
+
+    queue.append((node,h[node]))
+
+
+    while queue:
+
+        t=queue.pop(0)
+
+        print(t, end=" ")
+
+        if t[0]==goal:
+
+            print("found")
+
+            return
+
+        for neighbor in graph[t[0]]:
+
+            if (neighbor,h[neighbor]) not in visited:
+
+                visited.append((neighbor,h[neighbor]))
+
+                queue.append((neighbor,h[neighbor]))
+
+
+        queue.sort(key=second)
+
+
+if _name_ =='_main_':
+
+    #graph={ 0:[1,2], 1:[2], 2:[0,3],3:[3]}
+
+    #bfs(graph,2)
+
+    graph={1:[2,3,4],2:[5],3:[4,5,6],4:[6],5:[7],6:[8],8:[]}
+
+    h={1:40,2:32,3:25,4:35,5:19,6:17,7:10,8:0}
+
+
+    best_first(graph,1,8)
